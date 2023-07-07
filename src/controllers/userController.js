@@ -56,7 +56,7 @@ apiUsers.getOne = async function (req, res) {
         res.status(400).json({ err: err.message });
     }
     const userId = req.params.id;
-    const userObj = await userModel.findById(userId);
+    const userObj = await userModel.findById(userId).populate("todos");
     if (!userObj) {
         return res.status(400).json("No user found with this id");
     }

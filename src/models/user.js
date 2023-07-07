@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true,
     },
-    todos: [{ type: objectId, ref: "todos" }],
+    todos: [{ type: objectId, ref: "Todo" }],
     deleted: { type: Boolean, default: false },
 });
 
