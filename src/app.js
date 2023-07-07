@@ -10,6 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(morgan("combined"));
 app.use(async (req, res, next) => {
+    if (req.path === "/signin") {
+        return next();
+    }
     if (!req.headers.authorization) {
         return res.sendStatus(403);
     }
@@ -22,7 +25,9 @@ app.use(async (req, res, next) => {
 
     try {
         const decoded = await jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
-        req.user = decoded.account;
+        console.log(decoded);
+        req.userId = decoded._id;
+        console.log(req.userId);
     } catch (err) {
         console.log(err);
         return res.sendStatus(403);

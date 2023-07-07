@@ -10,7 +10,7 @@ usersRouter.get("/", usersManager.getAll);
 usersRouter.post("/", usersManager.create);
 usersRouter.put("/:id", usersManager.update);
 usersRouter.patch("/:id", usersManager.softDelete);
-usersRouter.delete("/perm/:id", usersManager.hardDelete);
+usersRouter.delete("/:id", usersManager.hardDelete);
 mainRouter.use("/users", usersRouter);
 
 const todosRouter = express.Router();
@@ -19,7 +19,7 @@ todosRouter.get("/", todosManager.getAll);
 todosRouter.post("/", todosManager.create);
 todosRouter.put("/:id", todosManager.update);
 todosRouter.patch("/:id", todosManager.softDelete);
-todosRouter.delete("/perm/:id", todosManager.hardDelete);
+todosRouter.delete("/:id", todosManager.hardDelete);
 mainRouter.use("/todos", todosRouter);
 
 mainRouter.post("/signin", signinManager);
