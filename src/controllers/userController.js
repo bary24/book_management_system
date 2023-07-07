@@ -1,4 +1,5 @@
 const userModel = require("../models/user");
+const todoModel = require("../models/todo");
 const _ = require("lodash");
 const apiUsers = {};
 const bcrypt = require("bcrypt");
@@ -95,7 +96,8 @@ apiUsers.softDelete = async function (req, res) {
 apiUsers.hardDelete = async function (req, res) {
     try {
         const userId = req.params.id;
-        const harddeleteduser = await userModel.findByIdAndDelete(userId);
+        await userModel.findByIdAndDelete(userId);
+        await todoModel.deleteMany({ userId });
         return res
             .status(200)
             .json({ result: `user with id ${userId} has been deleted successfully ` });

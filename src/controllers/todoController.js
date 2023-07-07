@@ -84,8 +84,10 @@ apiTodos.softDelete = async function (req, res) {
 apiTodos.hardDelete = async function (req, res) {
     try {
         const todoId = req.params.id;
-        const harddeletedTodo = await todoModel.findByIdAndDelete(todoId);
-        return res.status(200).json(harddeletedTodo);
+        await todoModel.findByIdAndDelete(todoId);
+        return res
+            .status(200)
+            .json({ result: `Todo with id ${todoId} has been deleted successfully` });
     } catch (err) {
         console.log(err);
         return res.status(500).json(err.message);
