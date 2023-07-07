@@ -385,6 +385,36 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Seed database",
+			"item": [
+				{
+					"name": "seed data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE4MWZiMmU0ZjA2YzljZTQ3ZjVmNjgiLCJmaXJzdG5hbWUiOiJBaG1lZDIiLCJsYXN0bmFtZSI6IkhlbG15IiwiZW1haWwiOiJhaG1lZC5iYXJ5MjJAZ21haWwiLCJ0b2RvcyI6WyI2NGE4MWZjYmU0ZjA2YzljZTQ3ZjVmNmIiXSwiZGVsZXRlZCI6ZmFsc2UsIl9fdiI6MSwiaWF0IjoxNjg4NzQ2Njg1LCJleHAiOjE2ODg3NDc1ODV9.66GBPqPt1hNYFx_42HoPo2q77a2dD9xhu-tcEYKVIG8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/seed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"seed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [

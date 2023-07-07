@@ -3,6 +3,7 @@ const mainRouter = express.Router();
 const usersManager = require("../controllers/userController");
 const todosManager = require("../controllers/todoController");
 const signinManager = require("../controllers/signinController");
+const seedManager = require("../services/userseeder");
 
 const usersRouter = express.Router();
 usersRouter.get("/:id", usersManager.getOne);
@@ -23,4 +24,5 @@ todosRouter.delete("/:id", todosManager.hardDelete);
 mainRouter.use("/todos", todosRouter);
 
 mainRouter.post("/signin", signinManager);
+mainRouter.get("/seed", seedManager);
 module.exports = mainRouter;
