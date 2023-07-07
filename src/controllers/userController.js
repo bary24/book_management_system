@@ -1,13 +1,46 @@
 const userModel = require("../models/user");
 const _ = require("lodash");
 const apiUsers = {};
+const bcrypt = require("bcrypt");
+
+async function hashPassword(plainPassword) {
+    try {
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hash = await bcrypt.hash(plainPassword, salt);
+        return hash;
+    } catch (error) {
+        // Handle error
+        console.error("Error hashing password:", error);
+        throw error;
+    }
+}
 
 apiUsers.create = async function (req, res) {
-    const postData = req.body;
+    try {
+        const postData = req.body;
+        postData.password = await hashPassword(postData.password);
 
-    const userObj = await userModel.create(postData);
+        const userObj = await userModel.create(postData);
 
-    return res.status(201).json(userObj);
+        return res.status(201).json(userObj);
+    } catch (err) {
+        return res.status(400).json({ err: err.message });
+    }
+};
+
+apiUsers.getAll = async function (req, res) {
+    try {
+        const user = await userModel.find({});
+        if (!user) {
+            return res.status(400).json("No user found");
+        }
+
+        return res.status(200).json(user);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err.message);
+    }
 };
 
 apiUsers.getOne = async function (req, res) {

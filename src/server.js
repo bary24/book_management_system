@@ -9,7 +9,7 @@ async function startServer() {
     await connectMongo();
 
     await mongoose.syncIndexes();
-
+    console.log(port);
     app.listen(port, function () {
         console.log(`working on ${port}`);
     });
