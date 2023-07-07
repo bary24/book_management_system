@@ -10,6 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(morgan("combined"));
 app.use(async (req, res, next) => {
+    if (req.path === "/users" && req.method === "POST") {
+        return next();
+    }
     if (req.path === "/signin") {
         return next();
     }
