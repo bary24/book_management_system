@@ -87,6 +87,8 @@ apiUsers.softDelete = async function (req, res) {
             new: true,
         });
 
+        await todoModel.updateMany({ userId }, updates);
+
         return res.status(200).json(deleteduser);
     } catch (err) {
         console.log(err);

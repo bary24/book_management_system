@@ -85,6 +85,12 @@ apiTodos.hardDelete = async function (req, res) {
     try {
         const todoId = req.params.id;
         await todoModel.findByIdAndDelete(todoId);
+        const user = await userModel.findById(req.userId);
+        const newTodos = user.todos.filter((id) => id.toString() !== todoId);
+        console.log("NEW TODOS");
+        console.log(newTodos);
+        user.todos = newTodos;
+        await user.save();
         return res
             .status(200)
             .json({ result: `Todo with id ${todoId} has been deleted successfully` });
