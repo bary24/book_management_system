@@ -5,7 +5,7 @@ const booksManager = require("../controllers/bookController");
 const signinManager = require("../controllers/signinController");
 const seedManager = require("../services/userseeder");
 const borrowingProcessManager = require("../controllers/borrowingProcessController");
-const dashboardManager = require("../controllers/dashboardController");
+const analyticsManager = require("../controllers/analyticsController");
 
 const usersRouter = express.Router();
 usersRouter.get("/:id", borrowerManager.getOne);
@@ -26,6 +26,9 @@ mainRouter.use("/books", booksRouter);
 const borrowingProcessRouter = express.Router();
 
 borrowingProcessRouter.get("/", borrowingProcessManager.getAll);
+borrowingProcessRouter.get("/period/:month", analyticsManager.createCSVReportByMonth);
+borrowingProcessRouter.get("/over_due/:month", analyticsManager.createCSVReportForOverDue);
+borrowingProcessRouter.get("/overdue", borrowingProcessManager.getOverdue);
 borrowingProcessRouter.get("/borrowed_books", borrowingProcessManager.getMyBorrowedBooks);
 borrowingProcessRouter.get("/:id", borrowingProcessManager.getOne);
 borrowingProcessRouter.post("/", borrowingProcessManager.create);
@@ -33,7 +36,6 @@ borrowingProcessRouter.put("/:id", borrowingProcessManager.update);
 borrowingProcessRouter.delete("/:id", borrowingProcessManager.delete);
 mainRouter.use("/borrow_processes", borrowingProcessRouter);
 
-mainRouter.get("/dashboard", dashboardManager.getAll);
 mainRouter.post("/signin", signinManager);
 mainRouter.get("/seed", seedManager);
 module.exports = mainRouter;

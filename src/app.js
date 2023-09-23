@@ -28,8 +28,7 @@ app.use(async (req, res, next) => {
 
     try {
         const decoded = await jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
-        console.log("SJWKS");
-        console.log(decoded);
+
         req.userId = decoded.borrower_id;
         console.log(req.userId);
     } catch (err) {
