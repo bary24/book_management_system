@@ -5,13 +5,14 @@
     "main": "index.js",
     "scripts": {
         "test": "mocha",
-        "start": "node src/server.js "
+        "start": "node src/server.js ",
+        "seed": "node src/services/userseeder.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@faker-js/faker": "^7.3.0",
+        "@faker-js/faker": "^7.6.0",
         "eslint": "^8.19.0",
         "eslint-config-standard": "^17.0.0",
         "eslint-plugin-import": "^2.26.0",
@@ -27,6 +28,7 @@
         "jsonwebtoken": "^9.0.1",
         "lodash": "4.17.21",
         "mongoose": "^6.4.4",
-        "morgan": "^1.10.0"
+        "morgan": "^1.10.0",
+        "pg": "^8.11.3"
     }
 }

@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = require("../../confg");
+const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = require("../../config");
+const dbClient = require("../services/postgres");
 
 // Generate an access token
 function generateAccessToken(payload) {
@@ -13,21 +14,22 @@ function generateRefreshToken(payload) {
     const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
     return refreshToken;
 }
-const userModel = require("../models/user");
+
 module.exports = async function (req, res) {
     try {
         const userInfo = req.body;
         const { email, password } = userInfo;
-        const savedUser = await userModel.findOne({ email });
-        const validPassword = bcrypt.compare(password, savedUser.password);
-        if (!validPassword) {
-            logger.info(`login failed for ${email} bad password`);
-            return res.sendStatus(401);
-        }
-        const payload = savedUser.toObject();
-        delete payload.password;
+        const result = await dbClient.query(`SELECT * FROM borrowers WHERE email=$1`, [email]);
+        const savedUser = result.rows[0];
+        console.log(savedUser);
 
-        console.log(payload);
+        const validPassword = await bcrypt.compare(password, savedUser.password);
+
+        if (!validPassword) {
+            return res.status(401).json({ response: "Invalid credentials" });
+        }
+        const payload = savedUser;
+        delete payload.password;
 
         const accessToken = generateAccessToken(payload);
         const refreshToken = generateRefreshToken(payload);

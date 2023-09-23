@@ -1,7 +1,6 @@
-const UserModel = require("../models/user"); // Import your User model
 const bcrypt = require("bcrypt");
 const { faker } = require("@faker-js/faker");
-const todoModel = require("../models/todo");
+const todoModel = require("../models/SQLQueries");
 const users = [];
 const todos = [];
 
