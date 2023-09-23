@@ -74,8 +74,9 @@ API Endpoints
 -   GET /borrowing_processes/:id Get borrowing process with id
 -   GET /borrowing_processes//borrowed_books List currently borrowed books for the current user
 
-## Dashboard API
+## CSV BORRIOWING API
 
--   GET /dashboard : Get stats : Overdue borrowing processes
+-   GET /borrow_processes/over_due/:month Get Overdue borrowing processes converted to CSV and write it to the file system
+-   GET /borrow_processes/period/:month Get Overdue borrowing processes converted to CSV and write it to the file system
     Database
     The application uses PostgreSQL for data storage. You can find the database schema in the database.sql file.
