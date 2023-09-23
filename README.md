@@ -40,6 +40,11 @@ This is a simple Library Management System built using Node.js and PostgreSQL. I
 -   A borrower can check the books they currently have.
 -   The system keeps track of due dates for books and lists overdue books.
 
+### Reports
+
+-   A report for overdue borrowing processes can be created for a certain month and downloaded as CSV
+-   A report for all borrowing processes for a certain month can be created and downloaded as CSV
+
 ### Installation
 
 git clone https://github.com/yourusername/library-management-system.git
@@ -80,3 +85,12 @@ API Endpoints
 -   GET /borrow_processes/period/:month Get Overdue borrowing processes converted to CSV and write it to the file system
     Database
     The application uses PostgreSQL for data storage. You can find the database schema in the database.sql file.
+
+## API DOCUMENTATION AND SCHEMA DIAGRAM
+
+-   You will find a postman folder in the root of the project with exported collection
+-   You will find the schema diagram as a jpg in the root of the project : schema_diagram
+
+## Authentication and Security
+
+-   The system is using Bcrypt and JWT to authenticate and authorize users
